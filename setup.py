@@ -13,7 +13,8 @@ except ImportError:  # For pip <= 9
 __version__ = '0.0.1'  # Should match with __init.py__
 _GITHUB_URL = 'https://github.com/tducret/precisionmapper-python',
 _KEYWORDS = ['api', 'precisionmapper', 'parsing', 'drone', 'platform',
-             'python-wrapper', 'scraping', 'scraper', 'parser']
+             'python-wrapper', 'scraping', 'scraper', 'parser',
+             'precisionhawk']
 
 
 install_reqs = parse_requirements('requirements.txt', session='hack')
