@@ -12,7 +12,9 @@ __email__ = 'hello@tducret.com'
 __version__ = '0.0.1'
 
 _DEFAULT_BEAUTIFULSOUP_PARSER = "html.parser"
-_SIGNIN_URL = 'https://www.precisionmapper.com/users/sign_in'
+_SIGNIN_URL = "https://www.precisionmapper.com/users/sign_in"
+_SURVEYS_URL = "https://www.precisionmapper.com/surveys"
+_SHARED_SURVEYS_URL = "https://www.precisionmapper.com/shared_surveys"
 
 _AUTHENTICITY_TOKEN_SELECTOR = 'meta["name"="csrf-token"]'
 
@@ -39,10 +41,12 @@ Chrome/67.0.3396.99 Safari/537.36',
                     status=ret.status_code, url=url, content=ret.text))
         return ret
 
-    def _post(self, url, post_data, expected_status_code=200):
+    def _post(self, url, post_data, expected_status_code=200,
+              allow_redirects=True):
         ret = self.session.post(url=url,
                                 headers=self.headers,
-                                data=post_data)
+                                data=post_data,
+                                allow_redirects=allow_redirects)
         if (ret.status_code != expected_status_code):
             raise ConnectionError(
                 'Status code {status} for url {url}\n{content}'.format(
@@ -128,10 +132,12 @@ class PrecisionMapper(object):
                      "login[username]": self.login,
                      "login[password]": self.password,
                      "commit": "Log In"}
-        res = self.client._post(
-            url=_SIGNIN_URL, post_data=post_data,
-            expected_status_code=200)
-        return(res.text)
+        res = self.client._post(url=_SIGNIN_URL, post_data=post_data,
+                                expected_status_code=302,
+                                allow_redirects=False)
+        # "allow_redirects = False" because we don't want to load the
+        # <survey> page right now => better performance
+        return res
 
 
 def _css_select(soup, css_selector):
