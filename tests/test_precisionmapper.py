@@ -17,14 +17,24 @@ _PASSWORD = os.environ.get('PRECISIONMAPPER_PASSWORD', None)
 
 def test_class_Survey():
     survey = Survey(
-        id="123abc", name="My survey", drone_platform="DJI",
+        id=123, name="My survey", url="https://url.com",
+        drone_platform="DJI",
         sensor="RGB", location="Toulouse, France",
-        date="2018-08-03T17:00:00.001Z", image_nb=3, size_in_MB=150,
+        date="2018-08-03T17:00:00.001Z", image_nb=3, size="150 MB",
         thumbnail="https://url_to_thumbnail.com", altitude_in_m=90,
         resolution_in_cm=2.5, area_in_ha=1.8)
-    assert survey.id == "123abc"
-    assert str(survey) == "[My survey] (Toulouse, France) : 3 images"
+    assert survey.id == 123
+    assert str(survey) == "[My survey] (Toulouse, France - 03/08/2018 17:00) \
+: 3 images"
     print()
+    print(survey)
+
+    # Test with the mandatory parameters only
+    survey = Survey(
+        id=456, name="My survey 2", url="https://url.com",
+        date="2018-08-03T16:00:00.001Z")
+    assert survey.id == 456
+    assert str(survey) == "[My survey 2] ( - 03/08/2018 16:00) : 0 images"
     print(survey)
 
 
@@ -32,18 +42,20 @@ def test_class_Survey_errors():
     with pytest.raises(TypeError):
         # Bad type for image number
         Survey(
-            id="123abc", name="My survey", drone_platform="DJI",
+            id=123, name="My survey", url="https://url.com",
+            drone_platform="DJI",
             sensor="RGB", location="Toulouse, France",
-            date="2018-08-03T17:00:00.001Z", image_nb="ABC", size_in_MB=150,
+            date="2018-08-03T17:00:00.001Z", image_nb="ABC", size="150 MB",
             thumbnail="https://url_to_thumbnail.com", altitude_in_m=90,
             resolution_in_cm=2.5, area_in_ha=1.8)
 
     with pytest.raises(TypeError):
         # Bad type for date
         Survey(
-            id="123abc", name="My survey", drone_platform="DJI",
+            id=123, name="My survey", url="https://url.com",
+            drone_platform="DJI",
             sensor="RGB", location="Toulouse, France",
-            date="not a date", image_nb=3, size_in_MB=150,
+            date="not a date", image_nb=3, size="150 MB",
             thumbnail="https://url_to_thumbnail.com", altitude_in_m=90,
             resolution_in_cm=2.5, area_in_ha=1.8)
 
@@ -66,9 +78,8 @@ def test_get_authenticity_token_errors():
 def test_signin():
     pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
     sign_in = pm.sign_in()
-    print()
-    print(sign_in)
     assert sign_in.status_code == 302
+    # Status code is 302 because there is a redirection when sign_in OK
 
 
 def test_signin_errors():
@@ -80,6 +91,10 @@ def test_signin_errors():
 
 def test_get_surveys():
     pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
+    pm.sign_in()
     surveys = pm.get_surveys()
     assert len(surveys) > 0
     assert type(surveys[0]) == Survey
+    print()
+    for survey in surveys:
+        print(survey)
