@@ -4,6 +4,7 @@
 
 import requests
 from requests import ConnectionError
+from datetime import datetime
 
 __author__ = """Thibault Ducret"""
 __email__ = 'hello@tducret.com'
@@ -38,32 +39,41 @@ class Client(object):
         return ret
 
 
-class MyClass(object):
-    """ Class to... """
-    def __init__(self, param1, list1, dict1):
-        self.param1 = param1
-        self.list1 = list1
-        self.dict1 = dict1
+class Survey(object):
+    """ Class for a drone survey (mission) """
+    def __init__(
+            self, id, name, drone_platform, sensor, location,
+            date, image_nb, size_in_MB, thumbnail, altitude_in_m,
+            resolution_in_cm, area_in_ha):
 
-    def get_param1(self):
-        """ Get the param1 """
-        return(self.param1)
+        if type(id) != str:
+            raise TypeError("id must be a string, not a "+type(id))
+        self.id = id
+        if type(image_nb) != int:
+            raise TypeError("image_nb must be an int, not a "+type(image_nb))
+        self.image_nb = image_nb
+        try:
+            self.date = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ')
+        except:
+            raise TypeError("date must respect the format \
+                         YYYY-MM-DDTHH:MM:SS.sssZ,received : "+date)
+
+        self.name = name
+        self.drone_platform = drone_platform
+        self.sensor = sensor
+        self.location = location
+
+        self.size_in_MB = size_in_MB
+        self.thumbnail = thumbnail
+        self.altitude_in_m = altitude_in_m
+        self.resolution_in_cm = resolution_in_cm
+        self.area_in_ha = area_in_ha
 
     def __str__(self):
-        return('{}'.format(self.param1))
+        return('[{name}] ({location}) : {image_nb} images'.format(
+            name=self.name,
+            location=self.location,
+            image_nb=self.image_nb))
 
     def __repr__(self):
-        return("Myclass(param1={})".format(self.param1))
-
-    def __len__(self):
-        return len(self.list1)
-
-    def __getitem__(self, key):
-        """ Méthod to access the object as a list
-        (ex : list1[1]) """
-        return self.list[key]
-
-    def __getattr__(self, attr):
-        """ Method to access a dictionnary key as an attribute
-        (ex : dict1.my_key) """
-        return self.dict1.get(attr, "")
+        return("Survey(id={}, name={})".format(self.id, self.name))
