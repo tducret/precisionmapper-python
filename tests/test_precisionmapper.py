@@ -24,7 +24,7 @@ def test_class_Survey():
     assert str(survey) == "[My survey] (Toulouse, France) : 3 images"
 
 
-def test_class_MyClass_errors():
+def test_class_Survey_errors():
     with pytest.raises(TypeError):
         # Bad type for image number
         Survey(
