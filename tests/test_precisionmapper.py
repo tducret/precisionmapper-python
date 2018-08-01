@@ -45,6 +45,21 @@ def test_class_Survey_errors():
             resolution_in_cm=2.5, area_in_ha=1.8)
 
 
+def test_get_authenticity_token():
+    pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
+    authenticity_token = pm.get_authenticity_token()
+    print()
+    print("authenticity_token = {}".format(authenticity_token))
+    assert authenticity_token != ""
+
+
+def test_get_authenticity_token_errors():
+    with pytest.raises(ValueError):
+        # Bad type for image number
+        pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
+        pm.get_authenticity_token(url="https://example.com")
+
+
 def test_get_surveys():
     pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
     surveys = pm.get_surveys()
