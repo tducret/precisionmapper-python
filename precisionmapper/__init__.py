@@ -99,11 +99,13 @@ class Survey(object):
         self.area_in_ha = area_in_ha
 
     def __str__(self):
-        return('[{name}] ({location} - {date}) : {image_nb} images'.format(
+        return('[{name}] ({location} - {date}) : {image_nb} images, \
+{size}'.format(
             name=self.name,
             location=self.location,
             date=self.date_str,
-            image_nb=self.image_nb))
+            image_nb=self.image_nb,
+            size=self.size))
 
     def __repr__(self):
         return("Survey(id={}, name={})".format(self.id, self.name))

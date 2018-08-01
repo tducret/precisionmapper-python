@@ -25,7 +25,8 @@ def test_class_Survey():
         resolution_in_cm=2.5, area_in_ha=1.8)
     assert survey.id == 123
     assert str(survey) == "[My survey] (Toulouse, France - 03/08/2018 17:00) \
-: 3 images"
+: 3 images, 150 MB"
+    assert repr(survey) == "Survey(id=123, name=My survey)"
     print()
     print(survey)
 
@@ -34,7 +35,8 @@ def test_class_Survey():
         id=456, name="My survey 2", url="https://url.com",
         date="2018-08-03T16:00:00.001Z")
     assert survey.id == 456
-    assert str(survey) == "[My survey 2] ( - 03/08/2018 16:00) : 0 images"
+    assert str(survey) == "[My survey 2] ( - 03/08/2018 16:00) \
+: 0 images, 0 MB"
     print(survey)
 
 
@@ -58,6 +60,18 @@ def test_class_Survey_errors():
             date="not a date", image_nb=3, size="150 MB",
             thumbnail="https://url_to_thumbnail.com", altitude_in_m=90,
             resolution_in_cm=2.5, area_in_ha=1.8)
+
+    with pytest.raises(TypeError):
+        # Bad type for id
+        Survey(
+            id="abc", name="My survey 2", url="https://url.com",
+            date="2018-08-03T16:00:00.001Z")
+
+
+def test_class_PrecisionMapper():
+    pm = PrecisionMapper(login="username", password="password")
+    assert repr(pm) == "PrecisionMapper(login=username)"
+    assert str(pm) == "PrecisionMapper(login=username)"
 
 
 def test_get_authenticity_token():
