@@ -26,6 +26,7 @@ _SURVEY_NAME_SELECTOR = "div.surveyName > a['href']"
 _SURVEY_LOCATION_SELECTOR = "div.cellWrap.locationWrapper > span"
 _SURVEY_DATE_SELECTOR = "div.cellWrap.surveyDateRow .date"
 _SURVEY_IMG_NB_AND_SIZE = "div.surveyotherDetails > span"
+_SURVEY_SENSOR = ".surveySensorWrap"
 
 
 class Client(object):
@@ -100,12 +101,13 @@ class Survey(object):
 
     def __str__(self):
         return('[{name}] ({location} - {date}) : {image_nb} images, \
-{size}'.format(
+{size}, sensor : {sensor}'.format(
             name=self.name,
             location=self.location,
             date=self.date_str,
             image_nb=self.image_nb,
-            size=self.size))
+            size=self.size,
+            sensor=self.sensor))
 
     def __repr__(self):
         return("Survey(id={}, name={})".format(self.id, self.name))
@@ -186,12 +188,17 @@ survey_img_nb_and_size = {}".format(survey_img_nb_and_size))
                 raise ValueError("Cannot get survey size, \
 survey_img_nb_and_size = {}".format(survey_img_nb_and_size))
 
+            sensor = _css_select(survey_soup, _SURVEY_SENSOR)
+
             survey = Survey(
                 id=456, name=survey_name, url="https://url.com",
                 date=survey_date, location=survey_location,
-                image_nb=survey_img_nb, size=survey_size)
+                image_nb=survey_img_nb, size=survey_size, sensor=sensor)
             survey_list.append(survey)
         return survey_list
+
+    def get_shared_surveys(self, url=_SHARED_SURVEYS_URL):
+        return self.get_surveys(url=url)
 
 
 def _css_select(soup, css_selector):
