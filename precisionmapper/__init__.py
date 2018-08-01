@@ -5,10 +5,13 @@
 import requests
 from requests import ConnectionError
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 __author__ = """Thibault Ducret"""
 __email__ = 'hello@tducret.com'
 __version__ = '0.0.1'
+
+_SIGNIN_URL = 'https://www.precisionmapper.com/users/sign_in'
 
 
 class Client(object):
@@ -77,3 +80,37 @@ class Survey(object):
 
     def __repr__(self):
         return("Survey(id={}, name={})".format(self.id, self.name))
+
+
+class PrecisionMapper(object):
+    """ Class for the communications with precisionmapper.com """
+    def __init__(self, login, password):
+        self.login = login
+        self.password = password
+        self.client = Client()
+
+    def __str__(self):
+        return(repr(self))
+
+    def __repr__(self):
+        return("PrecisionMapper(login={})".format(self.login))
+
+    def get_surveys(self):
+        """ Function to get the surveys for the account """
+        return
+
+    def get_authenticity_token(self):
+        """ Returns an authenticity_token, mandatory for signing in """
+        ret = self.client._get(url=_SIGNIN_URL, expected_status_code=200)
+        html_content = ret.text
+
+    def sign_in(self):
+        post_data = {"utf8": "✓",
+                     "authenticity_token": "dopkOwAkV2dVZl3EtMxY%2ByyBPjl28afe%2FELaMKPNPX51plhgkQWx%2FzRQFH8w76Ywml5F8dyIZEaOjPrQk2ufhg==",
+                     "return": "",
+                     "login[username]": self.login,
+                     "login[password]": self.password,
+                     "commit": "Log In"}
+        self.client._post(url=_SIGNIN_URL, post_data=post_data,
+                          expected_status_code=200, ):
+        curl  -H 'authority: www.precisionmapper.com' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'origin: https://www.precisionmapper.com' -H 'upgrade-insecure-requests: 1' -H 'content-type: application/x-www-form-urlencoded' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'referer: https://www.precisionmapper.com/users/sign_in' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' -H 'cookie: _precisionmapper_session=4d2e19bc2b5d438b9b26b41d51bcb769' --data 'utf8=%E2%9C%93&authenticity_token=dopkOwAkV2dVZl3EtMxY%2ByyBPjl28afe%2FELaMKPNPX51plhgkQWx%2FzRQFH8w76Ywml5F8dyIZEaOjPrQk2ufhg%3D%3D&return=&login%5Busername%5D=helloworld&login%5Bpassword%5D=HelloW0rld%21&commit=Log+In' --compressed
