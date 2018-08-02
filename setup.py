@@ -33,9 +33,7 @@ setup(
     author="Thibault Ducret",
     author_email='hello@tducret.com',
     url=_GITHUB_URL,
-    download_url='{github_url}/tarball/{version}'.format(
-                                                github_url=_GITHUB_URL,
-                                                version=__version__),
+    download_url='%s/tarball/%s' % (_GITHUB_URL, __version__),
     keywords=_KEYWORDS,
     setup_requires=requirements,
     install_requires=requirements,
