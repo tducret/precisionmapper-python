@@ -11,7 +11,7 @@ except ImportError:  # For pip <= 9
 
 
 __version__ = '0.0.1'  # Should match with __init.py__
-_GITHUB_URL = 'https://github.com/tducret/precisionmapper-python',
+_GITHUB_URL = 'https://github.com/tducret/precisionmapper-python'
 _KEYWORDS = ['api', 'precisionmapper', 'parsing', 'drone', 'platform',
              'python-wrapper', 'scraping', 'scraper', 'parser',
              'precisionhawk']
@@ -32,7 +32,7 @@ setup(
     author="Thibault Ducret",
     author_email='hello@tducret.com',
     url=_GITHUB_URL,
-    download_url=_GITHUB_URL+"/tarball/"+__version__,
+    download_url='%s/tarball/%s' % (_GITHUB_URL, __version__),
     keywords=_KEYWORDS,
     setup_requires=requirements,
     install_requires=requirements,
@@ -49,9 +49,7 @@ setup(
 # ------------------------------------------
 # Make sure everything was pushed (with a git status)
 # (or git commit --am "Comment" and git push)
-# git tag 0.0.1 -m "First version"
-# git push --tags
+# export VERSION="0.0.1"; git tag $VERSION -m "First version"; git push --tags
 
 # If you need to delete a tag
-# git push --delete origin VERSION
-# git tag -d VERSION
+# git push --delete origin $VERSION; git tag -d $VERSION
