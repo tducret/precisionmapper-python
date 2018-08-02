@@ -5,10 +5,10 @@ from swagger_server.models.survey import Survey  # noqa: E501
 from swagger_server import util
 
 
-def get_surveys():  # noqa: E501
+def list_surveys():  # noqa: E501
     """list the surveys available
 
-    Get the surveys available # noqa: E501
+    List the surveys available # noqa: E501
 
 
     :rtype: List[Survey]
