@@ -22,8 +22,8 @@ paths:
       tags:
       - "user"
       summary: "list the surveys available"
-      description: "List the surveys available"
-      operationId: "list_surveys"
+      description: "Get the surveys available"
+      operationId: "get_surveys"
       produces:
       - "application/json"
       parameters: []
