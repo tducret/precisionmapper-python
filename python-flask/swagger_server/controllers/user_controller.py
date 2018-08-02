@@ -22,8 +22,13 @@ def list_surveys():  # noqa: E501
     """
     pm = PrecisionMapper(login=_LOGIN, password=_PASSWORD)
     pm.sign_in()
-    shared_surveys = pm.get_shared_surveys()
+    surveys = pm.get_surveys()
 
-    for survey in shared_surveys:
-        print(survey)
-    return 'do some magic!'
+    survey_list = []
+    for survey in surveys:
+        survey_obj = Survey(
+            date=survey.date, image_nb=survey.image_nb,
+            location=survey.location, name=survey.name,
+            sensors=survey.sensor, size=survey.size, survey_id=survey.id)
+        survey_list.append(survey_obj)
+    return survey_list
