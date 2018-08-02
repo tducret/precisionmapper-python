@@ -24,7 +24,6 @@ setup(
     name='precisionmapper',
     packages=find_packages(),
     package_data={},
-
     version=__version__,
     license="MIT license",
     platforms='Posix; MacOS X',
@@ -33,7 +32,7 @@ setup(
     author="Thibault Ducret",
     author_email='hello@tducret.com',
     url=_GITHUB_URL,
-    download_url='%s/tarball/%s' % (_GITHUB_URL, __version__),
+    download_url=_GITHUB_URL+"/tarball/"+__version__,
     keywords=_KEYWORDS,
     setup_requires=requirements,
     install_requires=requirements,
@@ -52,3 +51,7 @@ setup(
 # (or git commit --am "Comment" and git push)
 # git tag 0.0.1 -m "First version"
 # git push --tags
+
+# If you need to delete a tag
+# git push --delete origin VERSION
+# git tag -d VERSION
