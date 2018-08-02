@@ -7,8 +7,8 @@ info:
   contact:
     email: "hello@tducret.com"
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    name: "MIT"
+    url: "https://mit-license.org/"
 host: "localhost:8080"
 basePath: "/v1"
 tags:
@@ -23,7 +23,7 @@ paths:
       - "user"
       summary: "list the surveys available"
       description: "List the surveys available"
-      operationId: "list_surveys"
+      operationId: "get_surveys"
       produces:
       - "application/json"
       parameters: []

@@ -12,8 +12,8 @@ from swagger_server.test import BaseTestCase
 class TestUserController(BaseTestCase):
     """UserController integration test stubs"""
 
-    def test_list_surveys(self):
-        """Test case for list_surveys
+    def test_get_surveys(self):
+        """Test case for get_surveys
 
         list the surveys available
         """
