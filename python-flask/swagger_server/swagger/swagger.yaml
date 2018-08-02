@@ -23,7 +23,7 @@ paths:
       - "user"
       summary: "list the surveys available"
       description: "List the surveys available"
-      operationId: "get_surveys"
+      operationId: "list_surveys"
       produces:
       - "application/json"
       parameters: []
