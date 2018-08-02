@@ -1,0 +1,82 @@
+---
+swagger: "2.0"
+info:
+  description: "API to connect to PrecisionMapper"
+  version: "1.0.0"
+  title: "PrecisionMapper API"
+  contact:
+    email: "hello@tducret.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/tducret/PrecisionMapper/1.0.0"
+tags:
+- name: "user"
+  description: "Operations available to PrecisionMapper user"
+schemes:
+- "https"
+paths:
+  /surveys:
+    get:
+      tags:
+      - "user"
+      summary: "list the surveys available"
+      description: "List the surveys available"
+      operationId: "list_surveys"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "surveys available"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Survey"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+definitions:
+  Survey:
+    type: "object"
+    required:
+    - "date"
+    - "image_nb"
+    - "location"
+    - "name"
+    - "sensors"
+    - "size"
+    - "survey_id"
+    properties:
+      date:
+        type: "string"
+        format: "date-time"
+        example: "2017-10-02T10:36:33.001Z"
+      image_nb:
+        type: "integer"
+        format: "int32"
+        example: 105
+      location:
+        type: "string"
+        example: "Toulouse, France"
+      name:
+        type: "string"
+        example: "My survey"
+      sensors:
+        type: "string"
+        example: "RGB"
+      size:
+        type: "string"
+        example: "133 MB"
+        description: "Survey size"
+      survey_id:
+        type: "integer"
+        format: "int32"
+        example: 69235
+    example:
+      date: "2017-10-02T10:36:33.001Z"
+      image_nb: 105
+      location: "Toulouse, France"
+      name: "My survey"
+      sensors: "RGB"
+      size: "133 MB"
+      survey_id: 69235
