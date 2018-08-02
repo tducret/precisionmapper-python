@@ -46,3 +46,11 @@ setup(
     python_requires='>=3',
     tests_require=['pytest'],
 )
+
+# ------------------------------------------
+# To upload a new version on pypi
+# ------------------------------------------
+# Make sure everything was pushed (with a git status)
+# (or git commit --am "Comment" and git push)
+# git tag 0.0.1 -m "First version"
+# git push --tags
