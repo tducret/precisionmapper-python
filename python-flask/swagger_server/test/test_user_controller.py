@@ -18,7 +18,7 @@ class TestUserController(BaseTestCase):
         list the surveys available
         """
         response = self.client.open(
-            '/1.0.0/surveys',
+            '/v1/surveys',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
