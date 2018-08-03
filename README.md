@@ -9,6 +9,8 @@
 
 Python package to communicate with precisionmapper.com
 
+![Precisionmapper.com screenshot]("/images/precisionmapper_sreenshot.png")
+
 # Requirements
 
 - Python 3
@@ -37,16 +39,22 @@ for survey in shared_surveys:
 Example output :
 
 ```bash
-[High School Sample] (California, United States - 12/02/2017 23:52) : 103 images, 3.69 GB, sensor : RGB
-[Neighborhood Construction Sample] (Virginia, United States - 10/02/2017 16:36) : 34 images, 1.56 GB, sensor : RGB
-[Micasense RedEdge Sample] (N/A - 31/01/2017 21:24) : 505 images, 2.37 GB, sensor : Blue, Green, Red, NIR, Red edge
-[Palm Tree Farm Sample] (Bahia, Brazil - 08/07/2016 17:30) : 175 images, 12.4 GB, sensor : RGB
-[Solar Panel Farm Sample] (Georgia, United States - 27/05/2016 23:31) : 168 images, 3.12 GB, sensor : RGB
-[Construction Site Sample] (Florida, United States - 03/02/2016 17:03) : 287 images, 6.52 GB, sensor : BGNIR
-[Wheat Disease Sample] (Leicestershire, United Kingdom - 15/06/2015 12:45) : 121 images, 4.81 GB, sensor : RGB
-[Wheat - Sample 1] (Leicestershire, United Kingdom - 15/06/2015 11:55) : 225 images, 10.5 GB, sensor : RGB
-[Wheat - Sample 2] (Leicestershire, United Kingdom - 15/06/2015 11:04) : 242 images, 7.65 GB, sensor : BGNIR
-[3D Sample] (City of Stoke-on-Trent, United Kingdom - 22/05/2015 13:20) : 477 images, 10.6 GB, sensor : RGB
+[High School Sample] (California, United States - 12/02/2017 23:52) : 103 images, 3.69 GB, sensor : RGB, id : 17130
+[Neighborhood Construction Sample] (Virginia, United States - 10/02/2017 16:36) : 34 images, 1.56 GB, sensor : RGB, id : 17590
+[Micasense RedEdge Sample] (N/A - 31/01/2017 21:24) : 505 images, 2.37 GB, sensor : Blue, Green, Red, NIR, Red edge, id : 17321
+[Palm Tree Farm Sample] (Bahia, Brazil - 08/07/2016 17:30) : 175 images, 12.4 GB, sensor : RGB, id : 17453
+[Solar Panel Farm Sample] (Georgia, United States - 27/05/2016 23:31) : 168 images, 3.12 GB, sensor : RGB, id : 17424
+[Construction Site Sample] (Florida, United States - 03/02/2016 17:03) : 287 images, 6.52 GB, sensor : BGNIR, id : 17135
+[Wheat Disease Sample] (Leicestershire, United Kingdom - 15/06/2015 12:45) : 121 images, 4.81 GB, sensor : RGB, id : 2946
+[Wheat - Sample 1] (Leicestershire, United Kingdom - 15/06/2015 11:55) : 225 images, 10.5 GB, sensor : RGB, id : 2947
+[Wheat - Sample 2] (Leicestershire, United Kingdom - 15/06/2015 11:04) : 242 images, 7.65 GB, sensor : BGNIR, id : 2948
+[3D Sample] (City of Stoke-on-Trent, United Kingdom - 22/05/2015 13:20) : 477 images, 10.6 GB, sensor : RGB, id : 2942
 ```
 
-## TODO
+## API server usage
+
+An API server based on Flask is also available for this project.
+
+Read the documentation in the [python-flask](/tree/master/python-flask) folder.
+
+![API server]("/images/api_server.png")
