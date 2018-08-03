@@ -55,6 +55,6 @@ Example output :
 
 An API server based on Flask is also available for this project.
 
-Read the documentation in the [python-flask](/tree/master/python-flask) folder.
+Read the documentation in the [python-flask](/python-flask) folder.
 
 ![API server](/images/api_server.png)
