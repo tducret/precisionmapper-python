@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 __author__ = """Thibault Ducret"""
 __email__ = 'hello@tducret.com'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 _DEFAULT_BEAUTIFULSOUP_PARSER = "html.parser"
 _SIGNIN_URL = "https://www.precisionmapper.com/users/sign_in"
