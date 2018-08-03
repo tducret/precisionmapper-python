@@ -25,8 +25,9 @@ _SURVEYS_SELECTOR = "#surveysList .tableCellWrap"
 _SURVEY_NAME_SELECTOR = "div.surveyName > a['href']"
 _SURVEY_LOCATION_SELECTOR = "div.cellWrap.locationWrapper > span"
 _SURVEY_DATE_SELECTOR = "div.cellWrap.surveyDateRow .date"
-_SURVEY_IMG_NB_AND_SIZE = "div.surveyotherDetails > span"
-_SURVEY_SENSOR = ".surveySensorWrap"
+_SURVEY_IMG_NB_AND_SIZE_SELECTOR = "div.surveyotherDetails > span"
+_SURVEY_SENSOR_SELECTOR = ".surveySensorWrap"
+_SURVEY_URL_SELECTOR = "div.surveyName > a['href']"
 
 
 class Client(object):
@@ -101,13 +102,14 @@ class Survey(object):
 
     def __str__(self):
         return('[{name}] ({location} - {date}) : {image_nb} images, \
-{size}, sensor : {sensor}'.format(
+{size}, sensor : {sensor}, id : {id}'.format(
             name=self.name,
             location=self.location,
             date=self.date_str,
             image_nb=self.image_nb,
             size=self.size,
-            sensor=self.sensor))
+            sensor=self.sensor,
+            id=self.id))
 
     def __repr__(self):
         return("Survey(id={}, name={})".format(self.id, self.name))
@@ -162,6 +164,19 @@ class PrecisionMapper(object):
         survey_list = []
         for survey_soup in surveys_soup:
             survey_name = _css_select(survey_soup, _SURVEY_NAME_SELECTOR)
+
+            try:
+                url = survey_soup.select(_SURVEY_URL_SELECTOR)[0]["href"]
+            except:
+                raise ValueError("Cannot get URL for the survey \
+with css selector {}".format(_SURVEY_URL_SELECTOR))
+
+            try:
+                id = int(url.split("survey_id=")[1].split("&")[0])
+            except:
+                raise ValueError("Cannot extract id from URL {}".format(
+                    url))
+
             survey_location = _css_select(survey_soup,
                                           _SURVEY_LOCATION_SELECTOR)
             try:
@@ -174,7 +189,7 @@ class PrecisionMapper(object):
 with css selector {}".format(_SURVEY_DATE_SELECTOR))
 
             survey_img_nb_and_size = survey_soup.select(
-                _SURVEY_IMG_NB_AND_SIZE)
+                _SURVEY_IMG_NB_AND_SIZE_SELECTOR)
 
             try:
                 survey_img_nb = survey_img_nb_and_size[0].text
@@ -188,10 +203,10 @@ survey_img_nb_and_size = {}".format(survey_img_nb_and_size))
                 raise ValueError("Cannot get survey size, \
 survey_img_nb_and_size = {}".format(survey_img_nb_and_size))
 
-            sensor = _css_select(survey_soup, _SURVEY_SENSOR)
+            sensor = _css_select(survey_soup, _SURVEY_SENSOR_SELECTOR)
 
             survey = Survey(
-                id=456, name=survey_name, url="https://url.com",
+                id=id, name=survey_name, url=url,
                 date=survey_date, location=survey_location,
                 image_nb=survey_img_nb, size=survey_size, sensor=sensor)
             survey_list.append(survey)

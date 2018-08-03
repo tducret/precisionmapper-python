@@ -25,7 +25,7 @@ def test_class_Survey():
         resolution_in_cm=2.5, area_in_ha=1.8)
     assert survey.id == 123
     assert str(survey) == "[My survey] (Toulouse, France - 03/08/2018 17:00) \
-: 3 images, 150 MB, sensor : RGB"
+: 3 images, 150 MB, sensor : RGB, id : 123"
     assert repr(survey) == "Survey(id=123, name=My survey)"
     print()
     print(survey)
@@ -36,7 +36,7 @@ def test_class_Survey():
         date="2018-08-03T16:00:00.001Z")
     assert survey.id == 456
     assert str(survey) == "[My survey 2] ( - 03/08/2018 16:00) \
-: 0 images, 0 MB, sensor : "
+: 0 images, 0 MB, sensor : , id : 456"
     print(survey)
 
 
