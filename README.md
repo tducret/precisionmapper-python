@@ -9,7 +9,7 @@
 
 Python package to communicate with precisionmapper.com
 
-![Precisionmapper.com screenshot]("/images/precisionmapper_sreenshot.png")
+![Precisionmapper.com screenshot](/images/precisionmapper_sreenshot.png)
 
 # Requirements
 
@@ -57,4 +57,4 @@ An API server based on Flask is also available for this project.
 
 Read the documentation in the [python-flask](/tree/master/python-flask) folder.
 
-![API server]("/images/api_server.png")
+![API server](/images/api_server.png)
